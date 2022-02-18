@@ -1,0 +1,47 @@
+const products = [
+  {
+    _id: 1,
+    name: 'CORSAIR K63',
+    images: ['/images/K63_1.jpg', '/images/K63_2.jpg'],
+    description: 'Uncompromised wireless, mechanical performance',
+    descriptionLong: 'Experience ultimate gaming freedom with the CORSAIR K63 Wireless Mechanical Gaming Keyboard, featuring ultra-fast 1ms 2.4GHz wireless technology with CHERRY® MX mechanical keyswitches packed into a portable, tenkeyless design.',
+    brand: 'CORSAIR',
+    category: 'Mechanical',
+    switches: 'Cherry MX Red',
+    price: 560.41,
+    countInStock: 10,
+    rating: [5, 5, 5, 3, 4, 5, 1],
+    numReviews: 12,
+  },
+  {
+    _id: 2,
+    name: 'ROCCAT Vulcan 122',
+    images: ['/images/ROCCAT-Vulcan-122_1.jpg', '/images/ROCCAT-Vulcan-122_2.jpg'],
+    description: 'Developed for gamers who love the feel of mechanical switches',
+    descriptionLong: 'A marvel of German engineering that delivers the industry’s best in speed and responsiveness. The switch adds to a comprehensive feature set that gamers know and love. The low-profile design is engineered for comfort and to reduce fatigue. Impressive durability and build quality thanks to its silver reinforcing anodized aluminum top plate, and switch housings designed to resist dust and dirt build-up.',
+    brand: 'ROCCAT',
+    category: 'Mechanical',
+    switches: 'Titan Tactile',
+    price: 574.00,
+    countInStock: 7,
+    rating: [5, 5, 5, 1, 4, 5, 1],
+    numReviews: 8,
+  },
+  {
+    _id: 3,
+    name: 'DELL Alienware AW510K',
+    images: ['/images/DELL-Alienware-AW510K-RGB-skos.jpg', '/images/DELL-Alienware-AW510K-RGB-bok.jpg'],
+    description: 'A beautifully designed, full-featured gaming keyboard. Made for ultimate performance.',
+    descriptionLong: 'Take down the enemy with industry-leading Cherry MX low profile Red switches. The combination of linear switching characteristics, low actuation force and shorter travel gives you better control as well as quick and smooth triggering, allowing you to efficiently pick off adversaries one by one. Key durability of 50 million keystrokes with no loss of quality. Fully programmable keys for macros and key assignments.',
+    brand: 'DELL',
+    category: 'Mechanical',
+    switches: 'Cherry MX Red',
+    price: 699.00,
+    countInStock: 5,
+    rating: [5, 5, 3, 2, 4, 5, 2],
+    numReviews: 12,
+  },
+
+]
+
+export default products
