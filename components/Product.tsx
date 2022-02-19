@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import Link from 'next/link'
 import styles from './Product.module.scss'
 import cls from 'classnames';
+import Rating from './Rating'
 
 interface Props {
   images: string[]
@@ -29,7 +30,10 @@ const Product = (props: Props) => {
       <Card.Body className={styles['card-body']}>
         <div className={styles['text-container']}>
           <Card.Text>{price} zł</Card.Text>
-          {/* TODO - Rating */}
+          <Rating
+            value={rating}
+            text={`(${numReviews})`}
+          />
         </div>
 
         <Link href={`/product/${_id}`} passHref>{name}</Link>
@@ -39,6 +43,7 @@ const Product = (props: Props) => {
 
             <Link href={`/cart/${_id}?qty=1`} passHref>
               <Button variant='secondary'
+                className={styles.button}
                 onMouseEnter={() => setBtnIsHovered(true)}
                 onMouseLeave={() => setBtnIsHovered(false)}
               >GO TO CART

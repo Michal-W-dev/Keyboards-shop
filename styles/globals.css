@@ -1,16 +1,43 @@
-html,
-body {
-  padding: 0;
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+  box-sizing: inherit;
+  outline: none;
 }
 
-a {
-  color: inherit;
+html {
+  font-size: 10px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+body {
+  font-size: 1.6rem;
+  text-shadow: none;
+  box-sizing: border-box;
+  background-color: lavender;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-shadow: none;
+}
+
+h1 {
+  font-size: 2.4rem;
+  padding: 0.12rem 0.4rem;
+}
+
+a:hover {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+/* Media Qeury */
+@media screen and (max-width:1000px) {
+  html {
+    font-size: 9px;
+  }
 }
