@@ -4,10 +4,11 @@ import styles from '../styles/Home.module.scss'
 import { Col, Row } from 'react-bootstrap'
 import products from '../data/product'
 import Product from '../components/Product'
+import ProductCarousel from '../components/ProductCarousel'
 
 const Home: NextPage = () => {
 
-
+  // console.log(products)
   return (
     <div className={styles.HomeScreen}>
       <Head>
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
       <h1>Home screen</h1>
       {/* TODO - Loader */}
       <>
+        <ProductCarousel products={products} />
         <Row className='justify-content-center my-4'>
           {products && products.map(product => (
             <Col key={product._id} xs={6} lg={4} xxl={3} as='div'>
