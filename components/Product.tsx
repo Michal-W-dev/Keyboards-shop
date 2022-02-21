@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import Link from 'next/link'
-import styles from './Product.module.scss'
+import styles from './product.module.scss'
 import cls from 'classnames';
-import Rating from './Rating'
+import Rating from './rating'
 
 interface Props {
   images: string[]

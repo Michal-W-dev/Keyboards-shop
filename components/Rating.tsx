@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Rating.module.scss'
+import styles from './rating.module.scss'
 
 interface Props {
   value: number[],
@@ -7,7 +7,7 @@ interface Props {
   fontSize?: string
 }
 
-const Stars = ({ value = [], text, fontSize = '1.4rem' }: Props) => {
+const Rating = ({ value = [], text, fontSize = '1.4rem' }: Props) => {
   const avgValue = value.length ? value.reduce((acc, val) => acc + val) / value.length : 0
 
   const stars = (val: number) => {
@@ -35,4 +35,4 @@ const Stars = ({ value = [], text, fontSize = '1.4rem' }: Props) => {
 }
 
 
-export default Stars
+export default Rating

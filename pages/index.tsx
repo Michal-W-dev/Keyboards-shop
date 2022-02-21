@@ -3,12 +3,11 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import { Col, Row } from 'react-bootstrap'
 import products from '../data/product'
-import Product from '../components/Product'
-import ProductCarousel from '../components/ProductCarousel'
+import Product from '../components/product'
+import ProductCarousel from '../components/productCarousel'
+
 
 const Home: NextPage = () => {
-
-  // console.log(products)
   return (
     <div className={styles.HomeScreen}>
       <Head>
@@ -16,7 +15,6 @@ const Home: NextPage = () => {
         <meta name="description" content="List of products" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Home screen</h1>
       {/* TODO - Loader */}
       <>
         <ProductCarousel products={products} />
@@ -29,7 +27,6 @@ const Home: NextPage = () => {
         </Row>
         {/* TODO - Message */}
       </>
-
     </div>
   )
 }
