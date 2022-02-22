@@ -1,0 +1,151 @@
+/* Mini-search -------------------------------------------------------- */
+
+$fancy-search-border: inset 0 0 0 1px rgb(223, 223, 223),
+inset 0 0 0 2px white,
+-15px -15px 0px -14px rgb(44, 44, 44),
+15px 15px 0px -14px rgb(44, 44, 44),
+0 0 0 2px white,
+2px 2px 1px black;
+
+
+.miniSearch-container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding: 5px 5px 5px 10px;
+  top: 50px;
+  width: 650px;
+  background-color: rgba(240, 240, 255, 0.96);
+  color: black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px black;
+  text-shadow: none;
+}
+
+// Left side of container -------------------------------------
+.miniSearch-cards {
+  .not-found {
+    text-align: center;
+    height: 5rem;
+    margin: 0.5rem 0;
+    transform: translateX(100px);
+    line-height: 5rem;
+    font-size: 2.1rem;
+    font-style: italic;
+    letter-spacing: 1px;
+    box-shadow: $fancy-search-border;
+  }
+}
+
+.miniCard {
+  display: flex;
+  align-items: center;
+  border-radius: 0px;
+  margin: 8px 0 8px 10px;
+  padding: 4px 1px;
+  box-shadow: $fancy-search-border;
+  transform: translateX(-200px);
+  background-color: transparent;
+  opacity: 0;
+  cursor: pointer;
+  animation: 0.5s slideLeft forwards cubic-bezier(0.34, 1.56, 0.64, 1);
+  p {
+    margin: 0;
+    padding: 0;
+    padding: 0 1.5rem;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &:hover {
+    background-image: linear-gradient(45deg, grey 70%, white 70%, white 71%, rgba(0, 0, 0, 0.95) 71%);
+    color: white;
+  }
+}
+
+// Right side of container -------------------------------------
+.typesBrands {
+  width: 180px;
+  margin-left: 3rem;
+  margin-top: 0.8rem;
+  padding-left: 0.5rem;
+  .title {
+    background-color: rgba(128, 128, 128, 0.1);
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.8rem;
+    padding-left: 2rem;
+    margin-bottom: 0.1rem;
+  }
+  ul {
+    padding-left: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: $fancy-search-border;
+  }
+  li {
+    padding: 0.24rem;
+    padding-left: 4rem;
+    font-size: 0.94em;
+    list-style-type: none;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.1);
+    }
+  }
+}
+
+/* Products dropdown ------------------------------------------------- */
+.keyboardType-container {
+  position: absolute;
+  left: 0;
+  top: 47px;
+  width: 100%;
+  background-color: rgba(240, 240, 255, 0.96);
+  color: black;
+  font-size: 2rem;
+  text-align: start;
+  text-shadow: none;
+  padding-top: 2px;
+  padding-left: 25%;
+  padding-bottom: 3px;
+  border-bottom: 2px solid black;
+  box-shadow: 0 3px 10px black;
+  border-radius: 0 0 10px 10px;
+  transform-origin: top;
+  transition: 0.1s;
+  hr {
+    margin: 0px;
+    border: 0;
+    height: 1px;
+    background: white;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4));
+  }
+  .keyboardType {
+    padding: 0.2rem 1.8rem;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    width: 100%;
+    border-radius: 9px 0 0 9px;
+    cursor: pointer;
+    transition: .1s;
+    &:hover {
+      padding-left: 2.8rem;
+      width: 100%;
+      background-image: linear-gradient(to right, rgba(230, 230, 250, 1) 5%, rgba(0, 0, 0, 0));
+    }
+  }
+}
+
+
+/* ------------------------------------------------------------------- */
+
+@keyframes slideLeft {
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
