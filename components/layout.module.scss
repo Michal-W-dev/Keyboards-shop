@@ -26,7 +26,26 @@
     }
   }
   i {
-    margin-right: 0.9rem;
+    margin-right: 0.8rem;
+    &:global(.fa-chevron-up) {
+      margin-left: 1rem;
+      transition: .2s;
+    }
+    &.rotateChevron {
+      transform: rotate(180deg);
+    }
+  }
+  .brandWrapper {
+    margin-right: 1rem;
+    padding-bottom: 0.5rem;
+    font-weight: 100;
+    font-size: 1.4rem;
+    a {
+      color: rgb(212, 212, 212);
+    }
+    span {
+      color: rgb(236, 254, 255);
+    }
   }
 }
 
@@ -114,7 +133,6 @@
 }
 /* ------------------------------------------------------------------- */
 
-
 /* Search form -------------------------------------------------------- */
 .form {
   height: 3.1rem;
@@ -126,6 +144,8 @@
   border: 1px solid grey;
   height: 100%;
   padding-left: 2rem;
+  display: inline-block;
+  width: 312px;
   &::placeholder {
     text-transform: uppercase;
     font-style: italic;

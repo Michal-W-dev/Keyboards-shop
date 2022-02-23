@@ -1,0 +1,104 @@
+.formGroup {
+  input {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.6rem;
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+    padding: 0.65rem 2rem 0.65rem 2.9rem;
+    color: white;
+    background: linear-gradient(70deg, rgba(0, 0, 0, .3) 85%, rgba(128, 128, 128, .2) 85%);
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 0 1px rgba(255, 255, 255, 0.3), 5px 5px 5px -2px black;
+  }
+  label {
+    text-transform: capitalize;
+    margin-right: 2rem;
+    color: lightgrey;
+    text-shadow: 1px 1px 2px black;
+  }
+  input::selection,
+  textarea::selection {
+    background: rgba(0, 255, 191, 0.4);
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.6rem;
+  }
+  input:focus,
+  textarea:focus {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 1px 1px 4px 1px black;
+  }
+  input:focus::placeholder,
+  textarea:focus::placeholder {
+    color: rgba(0, 0, 0, 0.9);
+  }
+  textarea {
+    font-family: 'Montserrat', sans-serif;
+    min-height: 6.5rem;
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+    padding: 0.7rem 2rem 0 2.9rem;
+    color: white;
+    background: linear-gradient(70deg, rgba(0, 0, 0, .3) 85%, rgba(128, 128, 128, .1) 85%);
+    border-radius: 50px;
+    box-shadow: inset 1px 1px 0 1px rgba(255, 255, 255, 0.3), 5px 5px 5px -2px black;
+  }
+}
+
+/*-- INLINE --*/
+.formGroup {
+  &.inline {
+    display: flex;
+    align-items: center;
+    margin: 2.1rem 0rem 2.1rem 1%;
+  }
+  &.inline label {
+    width: 9rem;
+    text-align: left;
+    margin-right: 1rem;
+    font-size: 1.7rem;
+  }
+  input.inline::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  input.inline {
+    color: white;
+    padding-left: 3rem;
+    background-color: rgba(148, 95, 95, 0.4);
+    background: linear-gradient(125deg, rgba(255, 255, 255, .7), rgba(128, 128, 128, .4) 9%, rgba(0, 0, 0, .6) 16%, rgba(0, 0, 0, .1) 45%, rgba(37, 37, 37, 0.6) 78%, rgba(0, 0, 0, 0.95));
+    box-shadow: inset 1px 1px 1px rgba(255, 255, 255, .9), 5px 5px 6px 1px black;
+  }
+  input.inline:focus {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    background: linear-gradient(45deg, rgba(255, 255, 255, .1) 75%, rgba(128, 128, 128, .1) 75%);
+    box-shadow: inset 2px 2px 4px 2px black, 5px 5px 6px 1px black;
+  }
+}
+
+/*-- FLOAT --*/
+.formGroup {
+  position: relative;
+  .form-placeholder {
+    position: absolute;
+    font-size: 1.8rem;
+    bottom: 2px;
+    left: 2.7rem;
+    padding-left: 0.5rem;
+    transition: .2s transform;
+    opacity: 0.9;
+  }
+  .form-control:focus+.form-placeholder,
+  .form-control:valid+.form-placeholder {
+    transform: scale(0.75) translate3d(-22%, -130%, 0);
+    color: white;
+    opacity: 1;
+    text-shadow: 1px 1px 1px black, 1px 1px 2px black;
+    transition: .2s transform;
+  }
+}

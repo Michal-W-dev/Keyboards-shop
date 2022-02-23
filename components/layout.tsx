@@ -1,4 +1,4 @@
-import { useState, ReactNode, FormEvent, ChangeEvent } from 'react'
+import { useState, ReactNode, FormEvent, ChangeEvent, useCallback } from 'react'
 import { Container, Navbar, Nav, Row, Col } from 'react-bootstrap'
 import Link from 'next/link'
 import useLineAnimation from '../hooks/useLineAnimation';
@@ -6,6 +6,7 @@ import useBackground from '../hooks/useBackground'
 import styles from './layout.module.scss'
 import cls from 'classnames';
 import { useRouter } from 'next/router'
+import Search from './search'
 
 interface Props {
   children: ReactNode
@@ -25,8 +26,13 @@ const Layout = ({ children }: Props) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log('push(`/keyboards/?search=${search}`)')
+    push(`/keyboards/?search=${search}`)
   }
+
+  const hideSearch = useCallback(() => {
+    setShowProducts(false)
+    setSearch('')
+  }, [])
 
 
   return (
@@ -35,16 +41,18 @@ const Layout = ({ children }: Props) => {
         <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed='top' >
           <div className={cls(styles.underline, styles[lineAnimationClass])} style={{ ...underlineStyles }} />
           <Container>
-            {/* TODO Search Component */}
-            <Navbar.Brand as={Link} href="/">MyShop</Navbar.Brand>
+            <Search search={search} showProducts={showProducts} hideSearch={hideSearch} />
+            <div className={styles.brandWrapper}>
+              <Navbar.Brand as={Link} href="/"><a><span>M</span>y<span>S</span>hop</a></Navbar.Brand>
+            </div>
             <form className={styles.form} onSubmit={handleSubmit}>
               <input
+                className={styles.input}
                 type="text"
                 onChange={handleSearch}
                 value={search}
                 autoFocus
                 placeholder="write what you're looking for"
-                className={cls(styles.input, 'mr-sm-2')} style={{ display: 'inline-block', width: '312px' }}
               />
               <button className={styles['btn-search']} type="submit"><i className="fas fa-search"></i></button>
             </form>
@@ -53,19 +61,12 @@ const Layout = ({ children }: Props) => {
               <Nav className="me-auto">
                 <Nav.Link as={'div'} className={cls(styles.follow, showProducts && styles.active)}
                   onClick={() => { setShowProducts(!showProducts); setSearch('') }}
-                > Products
-                  <i className="fas fa-chevron-up"
-                    style={{
-                      marginLeft: '1rem',
-                      transform: showProducts ? 'rotate(180deg)' : 'rotate(0)',
-                      transition: '0.2s'
-                    }}
-                  />
+                > Products <i className={cls("fas fa-chevron-up", showProducts && styles.rotateChevron)} />
                 </Nav.Link>
               </Nav>
 
               <Nav>
-                <Nav.Link as={'div'} className={cls(styles.follow, pathname == "/cart" && styles.active)}>
+                <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/cart" && styles.active)}>
                   <Link href='/cart' passHref>
                     <a>
                       <i className="fas fa-cart-arrow-down" /> Cart
@@ -73,7 +74,7 @@ const Layout = ({ children }: Props) => {
                   </Link>
                 </Nav.Link>
                 {/* TODO Dropdown : Sign in */}
-                <Nav.Link as={'div'} className={cls(styles.follow, pathname == "/login" && styles.active)}>
+                <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/login" && styles.active)}>
                   <Link href='/login' passHref>
                     <a>
                       <i className="fas fa-user" /> Sign In
