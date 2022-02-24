@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, ChangeEvent, FormEvent } from 'react'
+import React, { useState, useEffect, useRef, FormEvent } from 'react'
 import { Row, Col, Button, Form } from 'react-bootstrap'
 import styles from '../styles/login.module.scss'
 import useBackground from '../hooks/useBackground'
@@ -35,21 +35,21 @@ const LoginScreen = () => {
         <FormGroup
           name='email'
           value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           autoFocus
         />
         <FormGroup
           name='password'
           type='password'
           value={password}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
         {/* TODO Message */}
         <Button type='submit' className={styles.btnSignIn} variant="success"> Sign In </Button>
       </Form>
       <Row className='text-center'>
         <Col>
-          <span className={styles['span-new-customer']}>{"If you're a "}<span>new Customer</span> - </span>{' '}
+          <span className={styles['span-new-customer']}>{"Don't have an account? - "}</span>{' '}
           <Button
             className={styles.btnRegister}
             onClick={() => push('/register')}
