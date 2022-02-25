@@ -1,0 +1,28 @@
+$margin: 1.1rem;
+
+.product-modal {
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-left: $margin;
+  }
+  button {
+    letter-spacing: 4px;
+    padding: 6px 15px;
+    margin-right: $margin;
+  }
+  .image {
+    padding: 9rem;
+    background-color: white;
+  }
+  :global {
+    .btn-close {
+      background-color: whitesmoke;
+      padding: 5px 13px;
+      margin-right: $margin;
+    }
+    .modal-content {
+      border-radius: 10px;
+    }
+  }
+}
