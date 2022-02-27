@@ -25,4 +25,50 @@ $margin: 1.1rem;
       border-radius: 10px;
     }
   }
+  .miniImagesWrapper {
+    position: absolute;
+    bottom: 7%;
+    background-color: white;
+    box-shadow: 2px 2px 3px 1px black;
+  }
+  .miniImagesWrapper div {
+    position: relative;
+    display: inline-block;
+    width: 15rem;
+    height: 12rem;
+    padding: 70px 90px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width:999px) {
+  .product-modal {
+    .miniImagesWrapper div {
+      padding: 0;
+    }
+    :global(.modal-dialog) {
+      max-width: 90%;
+    }
+  }
+}
+
+@media screen and (max-width:750px) {
+  .product-modal {
+    h1 {
+      font-size: 1.9rem;
+      letter-spacing: 1px;
+    }
+    .miniImagesWrapper {
+      bottom: 0;
+      margin-bottom: -115px;
+    }
+    :global {
+      .modal-dialog {
+        max-width: 100%;
+      }
+      .modal-content {
+        border-radius: 0px;
+      }
+    }
+  }
 }
