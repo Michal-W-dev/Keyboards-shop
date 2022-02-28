@@ -1,0 +1,23 @@
+$popover-arrow-width: 2rem;
+$popover-arrow-height: 5rem;
+$popover-arrow-color: red;
+
+.popover {
+  position: relative;
+  background-color: rgba(0, 0, 0, .1);
+  border: 1px solid rgba(255, 255, 255, .3);
+  font-style: italic;
+  text-align: center;
+  width: 30rem;
+  & .header {
+    font-size: 1.9rem;
+    background: rgba(255, 255, 255, 0.65);
+    color: black;
+    text-transform: uppercase;
+    border-top: 10px solid rgb(47, 47, 47);
+  }
+  & .body {
+    font-size: 1.6rem;
+    background: rgba(50, 50, 50, 0.95);
+  }
+}

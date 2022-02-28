@@ -3,7 +3,7 @@ import styles from './rating.module.scss'
 
 interface Props {
   value: number[],
-  text: string,
+  text?: string,
   fontSize?: string
 }
 

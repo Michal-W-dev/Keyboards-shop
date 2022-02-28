@@ -9,6 +9,7 @@ import cls from 'classnames';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ImageNext from 'next/image'
+import Reviews from '../../components/reviews'
 
 const ProductPage = () => {
   const backgroundImage = useBackground({ stripesNum: 6, topSatur: 30, lowSatur: 10 })
@@ -125,20 +126,21 @@ const ProductPage = () => {
                   </Card>
                 </Col>
               </div>
-
             </Row>
           </Row>
         </Row>
         <hr />
         <Row>
-          <div className={cls(styles.description, 'text-start')}>
+          <div className={cls(styles.description, styles.dark, 'text-start')}>
             <h2>Description: </h2>
             <p>{descriptionLong}</p>
           </div>
           <hr />
-          {/* TODO Review */}
-
-          <Link href='/'><a className={styles['btn-goBack']}><Button>GO BACK</Button></a></Link>
+          <Reviews rating={rating} numReviews={numReviews} />
+          <hr />
+          <div className={cls(styles.dark, styles['btn-goBack-wrapper'])}>
+            <Link href='/'><a><Button className={styles['btn-goBack']}>GO BACK</Button></a></Link>
+          </div>
         </Row>
       </>
     </div >
