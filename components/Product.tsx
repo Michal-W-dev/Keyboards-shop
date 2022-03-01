@@ -12,10 +12,11 @@ interface Props {
   numReviews: number
   price: number
   _id: number
+  countInStock: number
 }
 
 const Product = (props: Props) => {
-  const { images, name, rating, numReviews, price, _id } = props;
+  const { images, name, rating, numReviews, price, _id, countInStock } = props;
   const [btnIsHovered, setBtnIsHovered] = useState(false);
 
   return (
@@ -46,15 +47,16 @@ const Product = (props: Props) => {
                 className={styles.button}
                 onMouseEnter={() => setBtnIsHovered(true)}
                 onMouseLeave={() => setBtnIsHovered(false)}
-              >GO TO CART
+                disabled={!countInStock}
+              >{countInStock ? 'GO TO CART' : 'OUT OF STOCK'}
               </Button>
             </Link>
-            <Link href={`/cart/${_id}?qty=1`} passHref >
-              <a className={cls(styles['icon-container'], btnIsHovered && styles['green-color'])}>
-                <i className="fas fa-cart-plus icon" />
-              </a>
-            </Link>
-
+            {!countInStock ? '' : (
+              <Link href={`/cart/${_id}?qty=1`} passHref >
+                <a className={cls(styles['icon-container'], btnIsHovered && styles['green-color'])}>
+                  <i className="fas fa-cart-plus icon" />
+                </a>
+              </Link>)}
           </div>
         </div>
       </Card.Body>
