@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, CSSProperties } from 'react'
 import { Form } from 'react-bootstrap'
 import styles from './formGroup.module.scss'
 import cls from 'classnames';
@@ -8,7 +8,7 @@ interface Props {
   placeholder?: string
   inline?: boolean
   float?: boolean
-  style?: React.CSSProperties
+  style?: CSSProperties
   // ...propsFormGroup
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void

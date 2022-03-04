@@ -4,16 +4,8 @@ import Link from 'next/link'
 import styles from './product.module.scss'
 import cls from 'classnames';
 import Rating from './rating'
+import { IProduct as Props } from '../types';
 
-interface Props {
-  images: string[]
-  name: string
-  rating: number[]
-  numReviews: number
-  price: number
-  _id: number
-  countInStock: number
-}
 
 const Product = (props: Props) => {
   const { images, name, rating, numReviews, price, _id, countInStock } = props;

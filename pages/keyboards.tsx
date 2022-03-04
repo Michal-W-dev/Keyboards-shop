@@ -3,10 +3,10 @@ import Product from '../components/product'
 import products from '../data/product'
 import { useRouter } from 'next/router'
 
-
 const SearchKeyboards = () => {
   const { query } = useRouter()
-  const search = query?.search && !Array.isArray(query.search) ? query.search.toLocaleLowerCase() : ''
+  const querySearch = String(query.search)
+  const search = querySearch ? querySearch.toLocaleLowerCase() : ''
 
   return (
     <div className='SearchScreen'>
