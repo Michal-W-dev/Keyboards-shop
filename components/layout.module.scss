@@ -47,6 +47,26 @@
       color: rgb(236, 254, 255);
     }
   }
+  .cartDiv {
+    .cartItemsNum {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      transform: translateX(-40px);
+      border-radius: 50%;
+      width: 23px;
+      height: 23px;
+      line-height: 16px;
+      font-size: 10px;
+      color: rgb(255, 238, 240);
+      background-color: rgba(0, 0, 0, .2);
+      border: 1px solid rgb(255, 213, 213);
+      border: 1px solid rgb(172, 172, 172);
+      box-shadow: inset 1px 1px 1px pink, inset -1px -1px 1px pink;
+    }
+  }
 }
 
 

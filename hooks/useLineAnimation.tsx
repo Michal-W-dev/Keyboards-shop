@@ -16,8 +16,8 @@ export default function useLineAnimState(): FnReturn {
   const [width, setWidth] = useState(46);
   const [lineAnimation, setLineAnimation] = useState('');
 
-
-  const removeLineAnimation = () => setLeftPos(0)
+  // Hide line outside the screen
+  const removeLineAnimation = () => setLeftPos(-109)
 
   useEffect(() => {
     if (lineAnimation === 'lineDisappear') {

@@ -14,6 +14,7 @@ const Cart = () => {
   const backgroundImage = useBackground({ stripesNum: 10, topSatur: 30, lowSatur: 10 })
   const { push, query, back, replace } = useRouter();
   const { state, dispatch } = useContext(StoreContext)
+  const { cart, cartItemsNum } = state;
 
   const productId = Number(query.id)
   const qty = Number(query.qty)
@@ -21,12 +22,12 @@ const Cart = () => {
 
 
   useEffect(() => {
-    if (product) {
-      dispatch({ type: CART_ACTION.ADD, payload: { ...product, qty } })
-    }
+    if (product) dispatch({ type: CART_ACTION.ADD, payload: { ...product, qty } })
   }, [qty, dispatch, product])
 
-  useEffect(() => localStorage.setItem('cart', JSON.stringify(state.cart)), [state.cart])
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify({ cart, cartItemsNum }))
+  }, [cart, cartItemsNum])
 
 
   const handleChangeQty = (product: IProduct, qty?: number, qtyChange?: number) => (e: MouseEvent | ChangeEvent) => {
@@ -36,11 +37,18 @@ const Cart = () => {
     // Quantity (0 to countInStock)
     qty = (qty < 0) ? 0 : (qty > product.countInStock) ? product.countInStock : qty
 
+    dispatch({ type: CART_ACTION.ADD, payload: { ...product, qty } })
+
     // Remove qty from url, to save changed qty if cart page refreshed (otherwise qty from url would overwrite localStorage)
     if (query.qty) replace(`/cart/_`)
-
-    dispatch({ type: CART_ACTION.ADD, payload: { ...product, qty } })
   }
+
+  const handleRemoveItem = (_id: number) => () => {
+    dispatch({ type: CART_ACTION.DELETE, payload: _id })
+    // Remove qty from url, to save changes if cart page refreshed (when item is removed)
+    if (query.qty) replace(`/cart/_`)
+  }
+
 
   const checkoutHandler = () => push('/login?redirect=shipping')
 
@@ -84,7 +92,7 @@ const Cart = () => {
                       </Col>
                       <Col>
                         <i className="fas fa-trash"
-                          onClick={() => dispatch({ type: CART_ACTION.DELETE, payload: _id })}
+                          onClick={handleRemoveItem(_id)}
                         ></i>
                       </Col>
                     </Row>

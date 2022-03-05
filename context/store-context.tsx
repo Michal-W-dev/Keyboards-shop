@@ -1,11 +1,12 @@
 import { createContext, useReducer, FC, Dispatch } from "react";
 import { IProduct } from "../types";
 
-interface InitialState { cart: IProduct[] }
+interface InitialState { cart: IProduct[], cartItemsNum: number }
 
 let storageData;
 if (typeof window !== 'undefined') storageData = localStorage.getItem('cart')
-const initialState: InitialState = storageData ? { cart: JSON.parse(storageData) } : { cart: [] }
+const initialState: InitialState = storageData ?
+  { ...JSON.parse(storageData) } : { cart: [], cartItemsNum: 0 }
 
 export enum CART_ACTION {
   GET = "GET",
@@ -17,9 +18,10 @@ export enum CART_ACTION {
 interface CartAction {
   type: CART_ACTION
   payload: IProduct | number
+  // payload: { cart: IProduct, cartItemsNum: number } | number
 }
 
-interface CartState { cart: IProduct[] }
+interface CartState { cart: IProduct[], cartItemsNum: number }
 
 
 export const StoreContext = createContext<{
@@ -38,13 +40,17 @@ const storeReducer = (state: CartState, action: CartAction) => {
 
       if (existItem) updatedCart = state.cart.map(item => item._id === newItem._id ? newItem : item)
       else updatedCart = [...state.cart, newItem]
+      const cartItemsNum = updatedCart.reduce((acc, val) => acc + val.qty!, 0)
+      return { cart: updatedCart, cartItemsNum }
+      // return { ...state, cart: updatedCart }
 
-      return { cart: updatedCart }
     }
     case CART_ACTION.DELETE: {
       const removedProductID = payload
       const updatedCart = state.cart.filter(item => item._id !== removedProductID)
-      return { cart: updatedCart }
+      const cartItemsNum = updatedCart.reduce((acc, val) => acc + val.qty!, 0)
+      return { cart: updatedCart, cartItemsNum }
+      // return { ...state, cart: updatedCart }
     }
     default:
       throw new Error(`Unhandled action type: ${type}`);

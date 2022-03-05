@@ -1,4 +1,4 @@
-import { useState, ReactNode, FormEvent, ChangeEvent, useCallback } from 'react'
+import { useState, ReactNode, FormEvent, ChangeEvent, useCallback, useContext, useEffect } from 'react'
 import { Container, Navbar, Nav, Row, Col } from 'react-bootstrap'
 import Link from 'next/link'
 import useLineAnimation from '../hooks/useLineAnimation';
@@ -7,6 +7,7 @@ import styles from './layout.module.scss'
 import cls from 'classnames';
 import { useRouter } from 'next/router'
 import Search from './search'
+import { StoreContext } from '../context/store-context';
 
 interface Props {
   children: ReactNode
@@ -21,6 +22,13 @@ const Layout = ({ children }: Props) => {
 
   const { pathname, push } = useRouter()
 
+  const { state } = useContext(StoreContext);
+  const [cartItemsNum, setCartItemsNum] = useState(0);
+
+  useEffect(() => {
+    // Avoid SSR hydrate error (server content not match client content)
+    setCartItemsNum(state.cartItemsNum)
+  }, [state.cartItemsNum])
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
@@ -66,12 +74,15 @@ const Layout = ({ children }: Props) => {
               </Nav>
 
               <Nav>
-                <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/cart" && styles.active)}>
+                <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/cart" && styles.active, styles.cartDiv)}>
                   <Link href='/cart' passHref>
                     <a>
                       <i className="fas fa-cart-arrow-down" /> Cart
                     </a>
                   </Link>
+                  {cartItemsNum !== 0 && <span className={styles.cartItemsNum}>{cartItemsNum}</span>}
+
+
                 </Nav.Link>
                 {/* TODO Dropdown : Sign in */}
                 <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/login" && styles.active)}>
