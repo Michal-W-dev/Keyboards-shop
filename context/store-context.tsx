@@ -3,7 +3,9 @@ import { IProduct } from "../types";
 
 interface InitialState { cart: IProduct[] }
 
-const initialState: InitialState = { cart: [] }
+let storageData;
+if (typeof window !== 'undefined') storageData = localStorage.getItem('cart')
+const initialState: InitialState = storageData ? { cart: JSON.parse(storageData) } : { cart: [] }
 
 export enum CART_ACTION {
   GET = "GET",

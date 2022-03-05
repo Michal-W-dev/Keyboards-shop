@@ -12,14 +12,12 @@ import { IProduct } from '../../types'
 
 const Cart = () => {
   const backgroundImage = useBackground({ stripesNum: 10, topSatur: 30, lowSatur: 10 })
-  const { push, query, back } = useRouter();
+  const { push, query, back, replace } = useRouter();
+  const { state, dispatch } = useContext(StoreContext)
 
   const productId = Number(query.id)
   const qty = Number(query.qty)
-
   const product = products.find(product => product._id === productId)
-
-  const { state, dispatch } = useContext(StoreContext)
 
 
   useEffect(() => {
@@ -28,23 +26,25 @@ const Cart = () => {
     }
   }, [qty, dispatch, product])
 
+  useEffect(() => localStorage.setItem('cart', JSON.stringify(state.cart)), [state.cart])
 
-
-  if (!product && query.id !== '_') return <h1>Id does not exist</h1>;
-
-
-  const checkoutHandler = () => push('/login?redirect=shipping')
 
   const handleChangeQty = (product: IProduct, qty?: number, qtyChange?: number) => (e: MouseEvent | ChangeEvent) => {
     e.preventDefault();
-    if (qty && qtyChange) qty += qtyChange
-    else qty = Number((e.target as HTMLInputElement).value)
-    if (qty < 0) qty = 0;
-    else if (qty > product.countInStock) qty = product.countInStock;
-    const cartItem = { ...product, qty }
-    dispatch({ type: CART_ACTION.ADD, payload: cartItem })
+    // onClick: (qty + qtyChange), onChange: e.target.value
+    qty = (qty && qtyChange) ? qty + qtyChange : Number((e.target as HTMLInputElement).value)
+    // Quantity (0 to countInStock)
+    qty = (qty < 0) ? 0 : (qty > product.countInStock) ? product.countInStock : qty
+
+    // Remove qty from url, to save changed qty if cart page refreshed (otherwise qty from url would overwrite localStorage)
+    if (query.qty) replace(`/cart/_`)
+
+    dispatch({ type: CART_ACTION.ADD, payload: { ...product, qty } })
   }
 
+  const checkoutHandler = () => push('/login?redirect=shipping')
+
+  if (!product && query.id !== '_') return <h1>Id does not exist</h1>;
 
   return (
     <div className={styles.cart} style={{ backgroundImage }}>
@@ -84,7 +84,7 @@ const Cart = () => {
                       </Col>
                       <Col>
                         <i className="fas fa-trash"
-                          onClick={(e) => { dispatch({ type: CART_ACTION.DELETE, payload: _id }) }}
+                          onClick={() => dispatch({ type: CART_ACTION.DELETE, payload: _id })}
                         ></i>
                       </Col>
                     </Row>
