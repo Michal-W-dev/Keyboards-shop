@@ -25,7 +25,7 @@ const ProductCarousel = ({ products }: Props) => {
       // productsIdx - which products appear on carousel (selected by idx)
       return productsIdx.map((selectedIdx, idx) => {
         return (
-          <Carousel.Item key={selectedIdx} interval={44200} >
+          <Carousel.Item key={selectedIdx} interval={8200} >
             <img
               className={cls('d-block', styles.item, idx % 2 ? styles.itemRight : styles.itemLeft)}
               src={products[selectedIdx].images[0]}

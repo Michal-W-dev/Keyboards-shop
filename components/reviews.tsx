@@ -29,7 +29,7 @@ const Reviews = ({ rating, numReviews }: Props) => {
         </div>
       </Col>
       <Col style={{ flex: '1 0 300px' }}>
-        <table className="text-left mx-auto">
+        <table className="text-left mx-auto my-3">
           <tbody>
             {Array(5).fill(0).map((_, idx, arr) => {
               const starNum = arr.length - idx
@@ -51,7 +51,7 @@ const Reviews = ({ rating, numReviews }: Props) => {
           </tbody>
         </table>
       </Col>
-      <Col style={{ flex: '1 0 300px' }} className='px-4'>
+      <Col style={{ flex: '1 0 300px' }} className='px-4 mt-3'>
         <div className={styles['write-review']}>
           <p>Help others to make their choice</p>
           <PopoverUnderConstruction>

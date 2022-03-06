@@ -1,5 +1,5 @@
 import { Col, Row } from 'react-bootstrap'
-import Product from '../components/product'
+import Product from '../components/productCard'
 import products from '../data/product'
 import { useRouter } from 'next/router'
 

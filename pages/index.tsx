@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import { Col, Row } from 'react-bootstrap'
 import products from '../data/product'
-import Product from '../components/product'
+import Product from '../components/productCard'
 import ProductCarousel from '../components/productCarousel'
 
 

@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import Link from 'next/link'
-import styles from './product.module.scss'
+import styles from './productCard.module.scss'
 import cls from 'classnames';
 import Rating from './rating'
 import { IProduct as Props } from '../types';
 
 
-const Product = (props: Props) => {
+const ProductCard = (props: Props) => {
   const { images, name, rating, numReviews, price, _id, countInStock } = props;
   const [btnIsHovered, setBtnIsHovered] = useState(false);
 
@@ -56,4 +56,4 @@ const Product = (props: Props) => {
   )
 }
 
-export default Product;
+export default ProductCard;
