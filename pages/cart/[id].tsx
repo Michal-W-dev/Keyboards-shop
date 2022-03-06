@@ -59,16 +59,18 @@ const Cart = () => {
       <Row>
         <Col lg={8} >
           <h1 className={styles.title}>SHOPPING CARD</h1>
-          {state.cart.length ? (
+          {cart.length ? (
             <ListGroup className={styles.listGroup} variant="flush">
-              {state.cart.map(product => {
+              {cart.map(product => {
                 const { _id, name, images, qty, price } = product;
                 return (
                   <ListGroup.Item key={_id}>
 
                     <Row className={styles.item}>
                       <Col style={{ flex: 2 }}><Image src={images[0]} alt={name} fluid rounded /></Col>
-                      <Col style={{ flex: 6 }}> {name} </Col>
+                      <Col style={{ flex: 6 }}>
+                        <span className={styles.itemName} onClick={() => push(`/product/${_id}`)}> {name} </span>
+                      </Col>
                       <Col>
                         <Form className={styles.form}>
 
@@ -102,7 +104,7 @@ const Cart = () => {
             </ListGroup>
           ) : ''}
 
-          <Message variant='info' variable={!state.cart.length}>
+          <Message variant='info' variable={!cart.length}>
             Your cart is empty
             <Button onClick={back} className='btn-message' variant="outline-primary" >Go Back</Button>
           </Message>
@@ -121,14 +123,14 @@ const Cart = () => {
                   </Col>
                   <Col>
                     <h3>
-                      {(state.cart.length) && state.cart.reduce((acc, val) => val.qty! * val.price + acc, 0).toFixed(2)} zł
+                      {(cart.length) && cart.reduce((acc, val) => val.qty! * val.price + acc, 0).toFixed(2)} zł
                     </h3>
                   </Col>
                 </Row>
               </Card.Title>
             </Card.Body>
             <Card.Footer className={styles.footer}>
-              <Button className={styles.btnCheckout} variant="success" onClick={checkoutHandler} disabled={!state.cart.length}>PROCEED TO CHECKOUT</Button>
+              <Button className={styles.btnCheckout} variant="success" onClick={checkoutHandler} disabled={!cart.length}>PROCEED TO CHECKOUT</Button>
             </Card.Footer>
           </Card>
         </Col>

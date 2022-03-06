@@ -41,6 +41,9 @@
     align-items: center;
     background: rgba(255, 255, 255, .1);
     box-shadow: 2px 2px 2px 1px black, 2px 1px 1px 5px grey;
+    .itemName {
+      cursor: pointer;
+    }
   }
   .form {
     position: relative;

@@ -2,6 +2,7 @@ import { createContext, useReducer, FC, Dispatch } from "react";
 import { IProduct } from "../types";
 
 interface InitialState { cart: IProduct[], cartItemsNum: number }
+export type DispatchCart = Dispatch<CartAction>
 
 let storageData;
 if (typeof window !== 'undefined') storageData = localStorage.getItem('cart')
@@ -18,14 +19,13 @@ export enum CART_ACTION {
 interface CartAction {
   type: CART_ACTION
   payload: IProduct | number
-  // payload: { cart: IProduct, cartItemsNum: number } | number
 }
 
 interface CartState { cart: IProduct[], cartItemsNum: number }
 
 
 export const StoreContext = createContext<{
-  state: InitialState; dispatch: Dispatch<CartAction>
+  state: InitialState; dispatch: DispatchCart
 }>({ state: initialState, dispatch: () => null });
 
 

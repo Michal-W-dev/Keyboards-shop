@@ -8,6 +8,7 @@ import cls from 'classnames';
 import { useRouter } from 'next/router'
 import Search from './search'
 import { StoreContext } from '../context/store-context';
+import MiniCart from './miniCart';
 
 interface Props {
   children: ReactNode
@@ -19,10 +20,11 @@ const Layout = ({ children }: Props) => {
 
   const [showProducts, setShowProducts] = useState(false);
   const [search, setSearch] = useState('')
+  const [showMiniCart, setShowMiniCart] = useState(false)
 
   const { pathname, push } = useRouter()
 
-  const { state } = useContext(StoreContext);
+  const { state, dispatch } = useContext(StoreContext);
   const [cartItemsNum, setCartItemsNum] = useState(0);
 
   useEffect(() => {
@@ -74,15 +76,23 @@ const Layout = ({ children }: Props) => {
               </Nav>
 
               <Nav>
-                <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/cart" && styles.active, styles.cartDiv)}>
+                <Nav.Link
+                  as={'div'}
+                  className={cls(styles.follow, pathname === "/cart" && styles.active, styles.cartDiv)}
+                  onMouseEnter={() => setShowMiniCart(true)}
+                  onMouseLeave={() => setShowMiniCart(false)}
+                >
                   <Link href='/cart' passHref>
                     <a>
                       <i className="fas fa-cart-arrow-down" /> Cart
                     </a>
                   </Link>
-                  {cartItemsNum !== 0 && <span className={styles.cartItemsNum}>{cartItemsNum}</span>}
-
-
+                  {cartItemsNum !== 0 && (
+                    <>
+                      <span className={styles.cartItemsNum}>{cartItemsNum}</span>
+                      <MiniCart cart={state.cart} dispatch={dispatch} showCart={showMiniCart} />
+                    </>
+                  )}
                 </Nav.Link>
                 {/* TODO Dropdown : Sign in */}
                 <Nav.Link as={'div'} className={cls(styles.follow, pathname === "/login" && styles.active)}>
@@ -102,7 +112,7 @@ const Layout = ({ children }: Props) => {
           {children}
         </Container>
       </main>
-      <footer className='Footer py-5' style={{ backgroundImage }}>
+      <footer className='py-5' style={{ backgroundImage }}>
         <Container>
           <Row>
             <Col>
