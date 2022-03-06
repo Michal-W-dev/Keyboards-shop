@@ -5,6 +5,8 @@ import useBackground from '../hooks/useBackground'
 import { useRouter } from 'next/router'
 import FormGroup from '../components/formGroup'
 import cls from 'classnames';
+import Head from 'next/head';
+
 
 const LoginScreen = () => {
   const backgroundImage = useBackground({ stripesNum: 6, topSatur: 30, lowSatur: 10 })
@@ -29,6 +31,10 @@ const LoginScreen = () => {
 
   return (
     <div className={cls(styles.login, bgAnimation && styles.bgAnim)} style={{ backgroundImage }}>
+      <Head>
+        <title>Login page</title>
+        <meta name="description" content="Login user" />
+      </Head>
       <h1 className={styles.title}>Sign In</h1>
 
       <Form onSubmit={handleSubmit}>

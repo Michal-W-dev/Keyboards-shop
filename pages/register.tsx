@@ -5,7 +5,9 @@ import styles from '../styles/register.module.scss'
 import useBackground from '../hooks/useBackground'
 import { FormEvent } from 'react'
 import cls from 'classnames';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+
 
 const RegisterScreen = () => {
   const backgroundImage = useBackground({ stripesNum: 6, topSatur: 30, lowSatur: 10 })
@@ -40,6 +42,10 @@ const RegisterScreen = () => {
 
   return (
     <div className={cls(styles.register, bgAnimation && styles.bgAnim)} style={{ backgroundImage }}>
+      <Head>
+        <title>Register page</title>
+        <meta name="description" content="Register user" />
+      </Head>
       <h1 className={styles.title}>Create Account</h1>
 
       <Form onSubmit={handleSubmit}>

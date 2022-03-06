@@ -13,7 +13,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Home page</title>
         <meta name="description" content="List of products" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* TODO - Loader */}
       <>

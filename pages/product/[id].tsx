@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ImageNext from 'next/image'
 import Reviews from '../../components/reviews'
+import Head from 'next/head';
+
 
 const ProductPage = () => {
   const backgroundImage = useBackground({ stripesNum: 6, topSatur: 30, lowSatur: 10 })
@@ -33,6 +35,10 @@ const ProductPage = () => {
   return (
     <div
       className={cls(styles.product, 'bg-primary pt-1')} style={{ backgroundImage }}>
+      <Head>
+        <title>Keyboard details page</title>
+        <meta name="description" content="Keyboard details: specification, images, type of switches, rating and reviews." />
+      </Head>
       {/* TODO Loader & Message */}
       <>
         <Row className='d-flex flex-column flex-lg-row mb-2'>

@@ -1,7 +1,9 @@
-import { Col, Row } from 'react-bootstrap'
-import Product from '../components/productCard'
-import products from '../data/product'
-import { useRouter } from 'next/router'
+import { Col, Row } from 'react-bootstrap';
+import Product from '../components/productCard';
+import products from '../data/product';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+
 
 const SearchKeyboards = () => {
   const { query } = useRouter()
@@ -9,7 +11,11 @@ const SearchKeyboards = () => {
   const search = querySearch ? querySearch.toLocaleLowerCase() : ''
 
   return (
-    <div className='SearchScreen'>
+    <div>
+      <Head>
+        <title>Search keyboards page</title>
+        <meta name="description" content="Show filtered keyboards by brand or type." />
+      </Head>
       <div className='loader'>
         {/* TODO Loader */}
       </div>

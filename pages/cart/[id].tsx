@@ -8,6 +8,7 @@ import cls from 'classnames'
 import { CART_ACTION, StoreContext } from '../../context/store-context'
 import Message from '../../components/message'
 import { IProduct } from '../../types'
+import Head from 'next/head';
 
 
 const Cart = () => {
@@ -56,6 +57,10 @@ const Cart = () => {
 
   return (
     <div className={styles.cart} style={{ backgroundImage }}>
+      <Head>
+        <title>Cart page</title>
+        <meta name="description" content="List of products in the cart" />
+      </Head>
       <Row>
         <Col lg={8} >
           <h1 className={styles.title}>SHOPPING CARD</h1>
