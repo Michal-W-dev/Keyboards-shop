@@ -13,7 +13,7 @@ inset 0 0 0 2px white,
   display: flex;
   flex-direction: row;
   text-align: left;
-  padding: 5px 5px 5px 10px;
+  padding: 5px;
   top: 50px;
   width: 650px;
   background-color: rgba(240, 240, 255, 0.96);
@@ -21,6 +21,7 @@ inset 0 0 0 2px white,
   border-radius: 5px;
   box-shadow: 2px 2px 4px black;
   text-shadow: none;
+  z-index: 2;
 }
 
 // Left side of container -------------------------------------
@@ -101,7 +102,7 @@ inset 0 0 0 2px white,
 .keyboardType-container {
   position: absolute;
   left: 0;
-  top: 47px;
+  top: 106%;
   width: 100%;
   background-color: rgba(240, 240, 255, 0.96);
   color: black;
@@ -147,5 +148,16 @@ inset 0 0 0 2px white,
     opacity: 1;
     transform: translateX(0);
     background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+@media screen and (max-width:770px) {
+  .miniSearch-container {
+    padding: 3px 7px 3px 0;
+    top: 32px;
+    width: 569px;
+  }
+  .keyboardType-container {
+    top: 102%;
   }
 }
