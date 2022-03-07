@@ -1,0 +1,103 @@
+.profileWrapper {
+  position: relative;
+  margin: 4rem auto;
+}
+
+.profile {
+  margin: 2rem auto;
+  padding: 2rem 4rem;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px 1px black;
+  background-size: 100%;
+  transition: background 0.9s;
+  width: 70%;
+  &.bgAnim {
+    background-position: 90%;
+    background-size: 400%;
+  }
+  .title {
+    text-align: center;
+    font-size: 3.1rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 2px black, 1px 1px 1px black;
+  }
+  .profile-section {
+    margin: 0 auto;
+  }
+
+  .btnUpdate {
+    margin: 2rem auto 3.5rem;
+    padding: 0.6rem 3rem;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px black, 1px 1px 2px black, 1px 1px 3px black;
+    background-image: linear-gradient(125deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5) 14%, rgba(0, 0, 0, 0.3) 82%, rgba(0, 0, 0, 0.8));
+    box-shadow: inset 0 0 25px rgb(27, 134, 0), 0 0 0 1px greenyellow, 5px 5px 8px -1px black;
+    &:active {
+      box-shadow: inset 1px 1px 1px 1px black,
+        0 0 0 1px white,
+        1px 1px 1px 0px black;
+      padding: 0.7rem 3rem 0.5rem;
+      text-shadow: 1px 1px 1px black,
+        1px 1px 2px black,
+        1px 1px 3px black,
+        2px 2px 3px black;
+      text-shadow: 1px 1px 2px black,
+        1px 1px 3px black,
+        2px 2px 2px black;
+    }
+  }
+}
+
+/* Checkbox ---------------------------------------- */
+.profile {
+  .formGroup-inline {
+    display: flex;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+    text-shadow: 1px 1px 2px black;
+    color: lightgrey;
+  }
+  :global {
+    .form-check-input[type="checkbox"] {
+      margin-top: -.5rem;
+      margin-left: 5rem;
+      width: 30px;
+      height: 30px;
+    }
+    .checked .form-check-input {
+      font-size: .7rem;
+      background-color: rgba(255, 255, 255, 0.35);
+      box-shadow: inset 1px 1px 5px 1px black;
+    }
+    .form-check-input {
+      background: linear-gradient(70deg, rgba(0, 0, 0, .3) 85%, rgba(128, 128, 128, .2) 85%);
+      border-radius: 20px;
+      box-shadow: inset 1px 1px 0 1px rgba(255, 255, 255, 0.3), 5px 5px 5px -2px black;
+      border: 1px solid rgba(255, 255, 255, .6);
+      margin: 5px;
+    }
+    .checked .form-check-input {
+      transform: rotate(358deg);
+      transition: .36s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  }
+}
+/* ----------------------------------------------------- */
+
+
+/* Media Qeury */
+@media screen and (max-width:990px) {
+  .profile {
+    width: 100%;
+  }
+}
+@media screen and (max-width:770px) {
+  .profile {
+    .title {
+      text-align: left;
+    }
+  }
+}
