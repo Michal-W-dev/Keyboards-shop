@@ -78,7 +78,7 @@ const Layout = ({ children }: Props) => {
               <Nav>
                 <Nav.Link
                   as={'div'}
-                  className={cls(styles.follow, pathname === "/cart" && styles.active, styles.cartDiv)}
+                  className={cls(styles.follow, pathname.includes("/cart") && styles.active, styles.cartDiv)}
                   onMouseEnter={() => setShowMiniCart(true)}
                   onMouseLeave={() => setShowMiniCart(false)}
                 >
@@ -102,6 +102,13 @@ const Layout = ({ children }: Props) => {
                     </a>
                   </Link>
                 </Nav.Link>
+                <Nav.Link as={'div'} className={cls(styles.follow, pathname.includes("/admin") && styles.active)}>
+                  <Link href='/admin/products' passHref>
+                    <a>
+                      <i className="fa-solid fa-shield" /> Admin
+                    </a>
+                  </Link>
+                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -121,6 +128,7 @@ const Layout = ({ children }: Props) => {
           </Row>
         </Container>
       </footer>
+
     </div>
   )
 }
