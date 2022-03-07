@@ -24,13 +24,13 @@ const FormGroup = (props: Props) => {
 
       {!float && <Form.Label>{name}</Form.Label>}
       <Form.Control
-        className={inline ? 'inline' : ''}
+        className={inline ? styles.inline : ''}
         {...propsFormGroup}
         placeholder={(float && ' ') || placeholder || `Enter ${name}`}
         style={{ width: inline ? 'auto' : '100%' }}
         autoComplete="off"
       />
-      {float && <Form.Label className='form-placeholder'>{placeholder}</Form.Label>}
+      {float && <Form.Label className={styles['form-placeholder']}>{placeholder}</Form.Label>}
     </Form.Group >
   )
 }
