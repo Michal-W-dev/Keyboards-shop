@@ -16,7 +16,7 @@ interface Props {
   text: string
 }
 const PopoverUnderConstruction = ({ children, text }: Props) => (
-  <OverlayTrigger trigger="click" overlay={popover(text)}>
+  <OverlayTrigger trigger="focus" overlay={popover(text)} >
     {children}
   </OverlayTrigger>
 );

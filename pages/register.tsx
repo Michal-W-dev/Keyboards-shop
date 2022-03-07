@@ -7,6 +7,7 @@ import { FormEvent } from 'react'
 import cls from 'classnames';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import PopoverUnderConstruction from '../components/popover'
 
 
 const RegisterScreen = () => {
@@ -75,7 +76,9 @@ const RegisterScreen = () => {
           onChange={e => setConfirmPassword(e.target.value)}
         />
         {/* TODO Message */}
-        <Button type='submit' className={styles.btnRegister} variant="success"> Create </Button>
+        <PopoverUnderConstruction>
+          <Button type='submit' className={styles.btnRegister} variant="success"> Create </Button>
+        </PopoverUnderConstruction>
       </Form>
       <Row className='text-end mt-4'>
         <Col>
