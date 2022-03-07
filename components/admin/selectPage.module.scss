@@ -1,0 +1,38 @@
+.selectPage {
+  position: absolute;
+  right: -30px;
+  top: 0;
+  margin-left: 2rem;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  box-shadow: 6px 6px 10px 1px black;
+  width: 150px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  border-radius: 15px;
+  div {
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: inset 0 1px 1px 0px black, inset 0 1px 2px white;
+    word-wrap: break-word;
+    vertical-align: middle;
+    overflow: hidden;
+    padding: 3px 0;
+    &:first-child {
+      border-top-right-radius: 15px;
+    }
+    &:last-child {
+      border-bottom-left-radius: 15px;
+    }
+  }
+  .active {
+    color: white;
+  }
+}
+
+/* Media Qeury */
+@media screen and (max-width:990px) {
+  .selectPage {
+    right: 0px;
+    box-shadow: 1px 1px 2px 1px black;
+  }
+}
