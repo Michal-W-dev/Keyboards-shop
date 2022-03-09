@@ -1,4 +1,5 @@
 import '../bootstrap.min.css';
+import '../data/fbConfig';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 import '@fortawesome/fontawesome-free/css/all.css';
