@@ -8,7 +8,8 @@ import { IProduct as Props } from '../types';
 
 
 const ProductCard = (props: Props) => {
-  const { images, name, rating, numReviews, price, _id, countInStock } = props;
+  const { images, name, rating, numReviews, price, countInStock, _id } = props;
+
   const [btnIsHovered, setBtnIsHovered] = useState(false);
 
   return (

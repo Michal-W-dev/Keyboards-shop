@@ -7,8 +7,9 @@ import useBackground from '../../hooks/useBackground'
 import styles from '../../styles/admin/profile.module.scss'
 import cls from 'classnames';
 import Head from 'next/head'
+import Message from '../../components/message'
 
-const ProfileScreen = () => {
+const Profile = () => {
   const backgroundImage = useBackground({ stripesNum: 7, topSatur: 30, lowSatur: 10 })
 
   const [name, setName] = useState('')
@@ -17,6 +18,7 @@ const ProfileScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isAdmin, setIsAdmin] = useState(true)
   const [bgAnimation, setBgAnimation] = useState(false)
+  const [showMsg, setShowMsg] = useState(false)
 
   const timerIdRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -24,6 +26,7 @@ const ProfileScreen = () => {
     e.preventDefault();
     setBgAnimation(true)
     timerIdRef.current = setTimeout(() => setBgAnimation(false), 2000)
+    setShowMsg(!showMsg)
   }
 
   useEffect(() => () => { if (timerIdRef.current) clearTimeout(timerIdRef.current) }, [])
@@ -87,14 +90,14 @@ const ProfileScreen = () => {
                 </Button>
               </PopoverUnderConstruction>
             </Form>
-            {/* TODO Message */}
           </Col>
         </Row>
         {/* TODO Loader */}
       </div>
       <SelectPage />
+      <Message variant='info' variable={showMsg}>Authorization is not yet implemented</Message>
     </div>
   )
 }
 
-export default ProfileScreen;
+export default Profile;

@@ -10,7 +10,7 @@ import Head from 'next/head';
 import PopoverUnderConstruction from '../components/popover'
 
 
-const RegisterScreen = () => {
+const Register = () => {
   const backgroundImage = useBackground({ stripesNum: 6, topSatur: 30, lowSatur: 10 })
   const [bgAnimation, setBgAnimation] = useState(false)
 
@@ -29,7 +29,7 @@ const RegisterScreen = () => {
     setBgAnimation(true)
     timerIdRef.current = setTimeout(() => setBgAnimation(false), 2000)
     if (password === confirmPassword) {
-      // TODO save registered data -> register({ name, email, password }) -> push('/')
+      // TODO save registered data -> push('/')
       console.log('registration complete')
     }
   }
@@ -91,9 +91,8 @@ const RegisterScreen = () => {
           </Button>
         </Col>
       </Row>
-      {/* TODO Loader */}
     </div >
   )
 }
 
-export default RegisterScreen
+export default Register

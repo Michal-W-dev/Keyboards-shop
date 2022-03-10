@@ -1,6 +1,5 @@
 import { useState, MouseEvent } from 'react'
 import { Col, Row, Card, Button, ListGroup, ListGroupItem, Dropdown, Image, DropdownButton } from 'react-bootstrap'
-import products from '../../data/product'
 import Rating from '../../components/rating'
 import useBackground from '../../hooks/useBackground'
 import ProductModal from '../../components/productModal'
@@ -11,25 +10,38 @@ import Link from 'next/link'
 import ImageNext from 'next/image'
 import Reviews from '../../components/reviews'
 import Head from 'next/head';
+import { GetServerSideProps } from 'next'
+import type { IProduct } from '../../types'
+import { getData } from '../../utils/fetch'
+import Message from '../../components/message'
 
+interface Props {
+  product: IProduct
+  id: string
+  error: string | null
+}
 
-const ProductPage = () => {
+const ProductPage = ({ product, id, error }: Props) => {
+  const { push } = useRouter()
+
   const backgroundImage = useBackground({ stripesNum: 6, topSatur: 30, lowSatur: 10 })
   const [qty, setQty] = useState(1);
   const [imageIdx, setImageIdx] = useState(0);
-
-  const { query, push } = useRouter()
-
   const [modalShow, setModalShow] = useState(false);
-  const displayModal = () => setModalShow(true)
 
-  let productId = Number(query.id)
-  let product = products.find(product => product._id === productId)
-  if (!product) return <h1>Id does not exist</h1>;
+
+  if (error || !product) {
+    return <div className={cls(styles.product, 'py-5')} style={{ backgroundImage }}>
+      <Message variant='danger' variable={!product || Boolean(error)} >
+        {(error) ? { error } : 'Id does not exist'}
+      </Message>
+    </div>
+  }
 
   const { images, name, rating, numReviews, price, countInStock, description, descriptionLong, switches, category } = product;
 
-  const handleAddToCart = () => push(`/cart/${productId}?qty=${qty}`)
+  const displayModal = () => setModalShow(true)
+  const handleAddToCart = () => push(`/cart/${id}?qty=${qty}`)
   const chooseDropdownQty = (e: MouseEvent) => setQty(Number((e.target as HTMLOptionElement).value))
 
   return (
@@ -39,7 +51,6 @@ const ProductPage = () => {
         <title>Keyboard details page</title>
         <meta name="description" content="Keyboard details: specification, images, type of switches, rating and reviews." />
       </Head>
-      {/* TODO Loader & Message */}
       <>
         <Row className='d-flex flex-column flex-lg-row mb-2'>
           <div className={styles.imageWrapper}>
@@ -80,7 +91,7 @@ const ProductPage = () => {
                 </div>
               </Col>
 
-              {/* ADD TO CART section */}
+              {/* ADD TO CART section --------- */}
               <div>
                 <Col className={styles.cartWrapper} >
                   <Card>
@@ -118,7 +129,6 @@ const ProductPage = () => {
                           </ListGroupItem>
                         )}
                       </ListGroup>
-
                     </Card.Body>
                     <hr />
                     <Card.Footer className="text-muted">
@@ -151,6 +161,19 @@ const ProductPage = () => {
       </>
     </div >
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = String(context.params?.id)
+  const data = await getData('products', id)
+
+  return {
+    props: {
+      product: data,
+      id,
+      error: data?.error || null
+    }
+  }
 }
 
 export default ProductPage;

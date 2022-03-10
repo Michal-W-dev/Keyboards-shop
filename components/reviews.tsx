@@ -51,7 +51,7 @@ const Reviews = ({ rating, numReviews }: Props) => {
           </tbody>
         </table>
       </Col>
-      <Col style={{ flex: '1 0 300px' }} className='px-4 mt-3'>
+      <Col style={{ flex: '1 0 295px' }} className='px-4 mt-3'>
         <div className={styles['write-review']}>
           <p>Help others to make their choice</p>
           <PopoverUnderConstruction>

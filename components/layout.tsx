@@ -128,7 +128,6 @@ const Layout = ({ children }: Props) => {
           </Row>
         </Container>
       </footer>
-
     </div>
   )
 }

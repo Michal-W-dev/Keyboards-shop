@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import styles from './search.module.scss'
-import products from '../data/product'
 import { useRouter } from 'next/router'
+import { getProducts } from '../utils/fetch'
+import { IProduct } from '../types'
 
 interface Props {
   search: string
@@ -13,19 +14,21 @@ interface Props {
 let prevPath: string | null;
 
 const Search = ({ search, showProducts, hideSearch }: Props) => {
+  const [products, setProducts] = useState<IProduct[]>([])
   const [filteredProducts, setfilteredProducts] = useState<typeof products>([])
-
 
   const { push, pathname } = useRouter()
 
   useEffect(() => {
     if (products.length) {
       const searchedProducts = products.filter(({ name, category }) => (
-        name.toLowerCase().includes(search) || category.toLowerCase().includes(search)
+        [name, category].some(el => el?.toLowerCase().includes(search))
       ))
       setfilteredProducts(searchedProducts)
     }
-  }, [search])
+  }, [search, products])
+
+  useEffect(() => getProducts({ setProducts }), [])
 
 
   useEffect(() => {
@@ -41,7 +44,7 @@ const Search = ({ search, showProducts, hideSearch }: Props) => {
   }, [pathname, showProducts, search, hideSearch])
 
 
-  const clickCardHandler = (_id: number) => {
+  const clickCardHandler = (_id: string) => {
     push(`/product/${_id}`)
     hideSearch()
   }
@@ -54,10 +57,12 @@ const Search = ({ search, showProducts, hideSearch }: Props) => {
   const filterUniqueSearchedTypes = () => {
     const i: string[] = []
     return filteredProducts.filter(({ category }, idx) => {
-      i.push(category);
-      return i.indexOf(category) === idx
+      if (category) {
+        i.push(category);
+        return i.indexOf(category) === idx
+      }
     }).map(({ category }) => (
-      <li key={category} onClick={() => searchKeyboardType(category)}> {category} </li>
+      <li key={category} onClick={() => category && searchKeyboardType(category)}> {category} </li>
     ))
   }
 
@@ -83,12 +88,9 @@ const Search = ({ search, showProducts, hideSearch }: Props) => {
 
         <Col className={styles['miniSearch-cards']}>
           {search.length && !filteredProducts.length ?
-            <div className='not-found'>
-              {/* TODO Loader */}
-              {'The product is not found.'}
-            </div>
+            <div className='not-found'> The product is not found.</div>
             : filteredProducts.map(({ images, name, price, _id }, idx) => (
-              <div className={styles.miniCard} key={_id} style={{ animationDelay: `${idx * 0.1}s` }} onClick={() => clickCardHandler(_id)}>
+              <div className={styles.miniCard} key={_id} style={{ animationDelay: `${idx * 0.1}s` }} onClick={() => clickCardHandler(_id!)}>
                 <img src={images[0]} alt={name} width='60px' />
                 <div>
                   <p>{name}</p>
@@ -97,7 +99,6 @@ const Search = ({ search, showProducts, hideSearch }: Props) => {
               </div>
             ))
           }
-
         </Col>
         <Col xs={4} className={styles.typesBrands}>
           {search.length && filteredProducts.length ?
@@ -107,7 +108,7 @@ const Search = ({ search, showProducts, hideSearch }: Props) => {
               </ul>
               <ul><h2 className={styles.title}>BRAND:</h2>
                 {filteredProducts.map(({ brand, _id }) => (
-                  <li key={_id} onClick={() => searchKeyboardType(brand)}>{brand}</li>
+                  <li key={_id} onClick={() => searchKeyboardType(brand!)}>{brand}</li>
                 ))}
               </ul>
             </>) : ''}

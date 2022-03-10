@@ -10,11 +10,12 @@ interface Props {
   float?: boolean
   style?: CSSProperties
   // ...propsFormGroup
-  value: string
+  value: string | number
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   required?: boolean
   type?: string
   autoFocus?: boolean
+  as?: any
 }
 
 const FormGroup = (props: Props) => {

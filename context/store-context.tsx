@@ -18,7 +18,7 @@ export enum CART_ACTION {
 
 interface CartAction {
   type: CART_ACTION
-  payload: IProduct | number
+  payload: IProduct | string
 }
 
 interface CartState { cart: IProduct[], cartItemsNum: number }
@@ -42,15 +42,12 @@ const storeReducer = (state: CartState, action: CartAction) => {
       else updatedCart = [...state.cart, newItem]
       const cartItemsNum = updatedCart.reduce((acc, val) => acc + val.qty!, 0)
       return { cart: updatedCart, cartItemsNum }
-      // return { ...state, cart: updatedCart }
-
     }
     case CART_ACTION.DELETE: {
       const removedProductID = payload
       const updatedCart = state.cart.filter(item => item._id !== removedProductID)
       const cartItemsNum = updatedCart.reduce((acc, val) => acc + val.qty!, 0)
       return { cart: updatedCart, cartItemsNum }
-      // return { ...state, cart: updatedCart }
     }
     default:
       throw new Error(`Unhandled action type: ${type}`);

@@ -16,7 +16,7 @@ const MiniCart = ({ cart, dispatch, showCart }: Props) => {
 
   const { push } = useRouter()
 
-  const handleRemoveItem = (_id: number) => () => {
+  const handleRemoveItem = (_id: string) => () => {
     dispatch({ type: CART_ACTION.DELETE, payload: _id })
   }
 
@@ -46,7 +46,7 @@ const MiniCart = ({ cart, dispatch, showCart }: Props) => {
                       </Col>
                       <Col>
                         <i className="fas fa-trash"
-                          onClick={handleRemoveItem(_id)}
+                          onClick={handleRemoveItem(_id!)}
                         ></i>
                       </Col>
                     </Row>

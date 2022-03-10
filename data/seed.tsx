@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: 1,
     name: 'CORSAIR K63',
     images: ['/images/K63_1.jpg', '/images/K63_2.jpg'],
     description: 'Uncompromised wireless, mechanical performance',
@@ -14,7 +13,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: 2,
     name: 'ROCCAT Vulcan 122',
     images: ['/images/ROCCAT-Vulcan-122_1.jpg', '/images/ROCCAT-Vulcan-122_2.jpg'],
     description: 'Developed for gamers who love the feel of mechanical switches',
@@ -28,7 +26,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: 3,
     name: 'DELL Alienware AW510K',
     images: ['/images/DELL-Alienware-AW510K-RGB-skos.jpg', '/images/DELL-Alienware-AW510K-RGB-bok.jpg'],
     description: 'A beautifully designed, full-featured gaming keyboard. Made for ultimate performance.',
@@ -42,7 +39,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: 4,
     name: 'SPC GEAR GK550',
     images: ['/images/GK550_1.jpg', '/images/GK550_2.jpg'],
     description:
@@ -57,7 +53,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: 5,
     name: 'HP Pavilion 600',
     images: ['/images/Pavilion_600_1.jpg', '/images/Pavilion_600_2.jpg'],
     description:
@@ -72,7 +67,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: 6,
     name: 'STEELSERIES Apex 5',
     images: ['/images/STEELSERIES-Apex-5-ukos-prawy.jpg', '/images/STEELSERIES-Apex-5-bok-lewy.jpg'],
     description:
@@ -87,5 +81,20 @@ const products = [
     numReviews: 12,
   },
 ]
+
+export const newProduct = () => {
+  fetch(`${process.env.NEXT_PUBLIC_DB_URL}/products.json`, {
+    method: 'POST',
+    body: JSON.stringify(products[5]),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(res => {
+      if (!res.ok) throw Error('Something went wrong')
+      return res.json()
+    })
+    .then(data => console.log('id ', data.name))
+    .catch(err => console.log('err ', err.message || 'Something went wrong!'))
+}
+
 
 export default products

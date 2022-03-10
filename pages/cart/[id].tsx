@@ -3,23 +3,26 @@ import { Row, Col, Card, Button, ListGroup, Image, Form } from 'react-bootstrap'
 import styles from '../../styles/cart.module.scss'
 import useBackground from '../../hooks/useBackground'
 import { useRouter } from 'next/router'
-import products from '../../data/product'
 import cls from 'classnames'
 import { CART_ACTION, StoreContext } from '../../context/store-context'
 import Message from '../../components/message'
 import { IProduct } from '../../types'
 import Head from 'next/head';
+import { GetServerSideProps } from 'next'
+import { getData } from '../../utils/fetch'
 
+interface Props {
+  product: IProduct
+  qty?: number
+  _id?: string
+  error: string | null
+}
 
-const Cart = () => {
+const Cart = ({ product, qty, _id, error }: Props) => {
   const backgroundImage = useBackground({ stripesNum: 10, topSatur: 30, lowSatur: 10 })
-  const { push, query, back, replace } = useRouter();
+  const { push, back, replace } = useRouter();
   const { state, dispatch } = useContext(StoreContext)
   const { cart, cartItemsNum } = state;
-
-  const productId = Number(query.id)
-  const qty = Number(query.qty)
-  const product = products.find(product => product._id === productId)
 
 
   useEffect(() => {
@@ -41,19 +44,24 @@ const Cart = () => {
     dispatch({ type: CART_ACTION.ADD, payload: { ...product, qty } })
 
     // Remove qty from url, to save changed qty if cart page refreshed (otherwise qty from url would overwrite localStorage)
-    if (query.qty) replace(`/cart/_`)
+    if (qty) replace(`/cart/_`)
   }
 
-  const handleRemoveItem = (_id: number) => () => {
+  const handleRemoveItem = (_id: string) => () => {
     dispatch({ type: CART_ACTION.DELETE, payload: _id })
     // Remove qty from url, to save changes if cart page refreshed (when item is removed)
-    if (query.qty) replace(`/cart/_`)
+    if (qty) replace(`/cart/_`)
   }
-
 
   const checkoutHandler = () => push('/login?redirect=shipping')
 
-  if (!product && query.id !== '_') return <h1>Id does not exist</h1>;
+  if (!product && _id !== '_') {
+    return <div className={cls(styles.product, 'py-5 my-5')} style={{ backgroundImage }}>
+      <Message variant='danger' variable={!product && _id !== '_'} >
+        {'Id does not exist'}
+      </Message>
+    </div>
+  }
 
   return (
     <div className={styles.cart} style={{ backgroundImage }}>
@@ -99,7 +107,7 @@ const Cart = () => {
                       </Col>
                       <Col>
                         <i className="fas fa-trash"
-                          onClick={handleRemoveItem(_id)}
+                          onClick={handleRemoveItem(_id!)}
                         ></i>
                       </Col>
                     </Row>
@@ -113,6 +121,7 @@ const Cart = () => {
             Your cart is empty
             <Button onClick={back} className='btn-message' variant="outline-primary" >Go Back</Button>
           </Message>
+          <Message variant='danger' variable={Boolean(error)}>Fail to load data</Message>
         </Col>
         <Col lg={4}>
 
@@ -142,6 +151,22 @@ const Cart = () => {
       </Row>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const _id = String(context.params?.id)
+  const qty = Number(context.query.qty)
+
+  const data = (_id !== '_') ? await getData('products', _id) : null
+
+  return {
+    props: {
+      product: data ? { ...data, _id } : null,
+      _id,
+      qty: qty || 1,
+      error: data?.error || null
+    }
+  }
 }
 
 export default Cart;
